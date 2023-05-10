@@ -1,7 +1,7 @@
 {
-	"name": "obsidian-sample-plugin",
+	"name": "obsidian-add-law-links",
 	"version": "1.0.0",
-	"description": "This is a sample plugin for Obsidian (https://obsidian.md)",
+	"description": "This is a plugin for german law students to automatically add the link to law references",
 	"main": "main.js",
 	"scripts": {
 		"dev": "node esbuild.config.mjs",
