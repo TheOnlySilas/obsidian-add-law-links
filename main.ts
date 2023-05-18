@@ -1,4 +1,4 @@
-import { App, Editor, MarkdownView, Modal, Notice, Plugin, PluginSettingTab, Setting } from 'obsidian';
+import { App, Editor, MarkdownView, Modal, Notice, Plugin, PluginSettingTab, Setting, addIcon } from 'obsidian';
 
 // Remember to rename these classes and interfaces!
 
@@ -17,9 +17,10 @@ export default class MyPlugin extends Plugin {
 		await this.loadSettings();
 
 		// This creates an icon in the left ribbon.
-		const ribbonIconEl = this.addRibbonIcon('dice', 'Sample Plugin', (evt: MouseEvent) => {
+		addIcon("para", `<text x="25px" y="75px" style="font-family:'Inter-Regular', 'Inter';font-size:100px;fill: var(--color-base-100);">§</text>`);
+		const ribbonIconEl = this.addRibbonIcon('para', 'Sample Plugin', (evt: MouseEvent) => {
 			// Called when the user clicks the icon.
-			new Notice('This is a not a notice!');
+			new Notice('This is a notice!');
 		});
 		// Perform additional things with the ribbon
 		ribbonIconEl.addClass('my-plugin-ribbon-class');
