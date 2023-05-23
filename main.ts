@@ -1,4 +1,6 @@
-import { App, Editor, MarkdownView, Modal, Notice, Plugin, PluginSettingTab, Setting, addIcon } from 'obsidian';
+import { App, Editor, EditorRangeOrCaret, EditorChange, MarkdownView, Modal, Notice, Plugin, PluginSettingTab, Setting, addIcon } from 'obsidian';
+import { Interface } from 'readline';
+import {viewer} from 'viewPlugin';
 
 // Remember to rename these classes and interfaces!
 
@@ -15,7 +17,7 @@ export default class MyPlugin extends Plugin {
 
 	async onload() {
 		await this.loadSettings();
-
+		var viewext = this.registerEditorExtension(viewer);
 		// This creates an icon in the left ribbon.
 		addIcon("para", `<text x="25px" y="75px" style="font-family:'Inter-Regular', 'Inter';font-size:100px;fill: var(--color-base-100);">§</text>`);
 		const ribbonIconEl = this.addRibbonIcon('para', 'Sample Plugin', (evt: MouseEvent) => {
@@ -46,6 +48,13 @@ export default class MyPlugin extends Plugin {
 				editor.replaceSelection('Sample Editor Command');
 			}
 		});
+		this.addCommand({
+			id: 'check-law',
+			name: 'Check for law resources',
+			editorCallback: (editor: Editor, view: MarkdownView) => {
+
+			}
+		});
 		// This adds a complex command that can check whether the current state of the app allows execution of the command
 		this.addCommand({
 			id: 'open-sample-modal-complex',
@@ -65,6 +74,7 @@ export default class MyPlugin extends Plugin {
 				}
 			}
 		});
+		
 
 		// This adds a settings tab so the user can configure various aspects of the plugin
 		this.addSettingTab(new SampleSettingTab(this.app, this));
@@ -75,8 +85,15 @@ export default class MyPlugin extends Plugin {
 			console.log('click', evt);
 		});
 
+		/**
+			this.registerEvent(this.app.workspace.on('editor-change', () => {
+			new Notice(this.app.workspace.);
+			}));
+		 */
+
 		// When registering intervals, this function will automatically clear the interval when the plugin is disabled.
 		this.registerInterval(window.setInterval(() => console.log('setInterval'), 5 * 60 * 1000));
+
 	}
 
 	onunload() {
